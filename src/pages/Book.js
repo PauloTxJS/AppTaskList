@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Book = () => {
+const Book = ({navigation}) => {
 	// const [value, onChangeText] = React.useState('Useless Placeholder');
 	return (
 		<View style={styles.container}>
@@ -26,7 +26,7 @@ const Book = () => {
 				<Text style={styles.saveButtonText}>Cadastrar</Text>
 			</TouchableOpacity>
 
-			<TouchableOpacity style={styles.cancelButton}>
+			<TouchableOpacity style={styles.cancelButton} onPress={() => {navigation.goBack()}}>
 				<Text style={styles.cancelButtonText}>Cancelar</Text>
 			</TouchableOpacity>
 		</View>	

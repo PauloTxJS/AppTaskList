@@ -14,8 +14,8 @@ const Main = () => {
     <View style={styles.container}>
 			<View style={styles.toolbox}>
 				<Text style={styles.title}>Lista de Leitura</Text>
-				<TouchableOpacity style={styles.toolboxButton}>
-					<Icon name="add" size={14} color="#fff"/>
+				<TouchableOpacity style={styles.toolboxButton} onPress={() => navigation.navigate('Book')}>
+					<Icon name="add" size={35} color="#fff"/>
 				</TouchableOpacity>
 			</View>
       
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 	},
 	toolboxButton: {
 		backgroundColor: "#3498db",
-		width: 22,
+		width: 35,
 		justifyContent: "center",
 		alignItems: "center",
 		borderRadius: 50
