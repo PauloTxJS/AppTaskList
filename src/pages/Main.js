@@ -7,7 +7,7 @@ const Main = () => {
 	const data = [
 		{ id: "1", title: "Código Limpo", anotations: "Livro muito bom!", read: false, photo: null },
 		{ id: "2", title: "C completo e total", anotations: "Muito show", read: false, photo: null },
-		{ id: "3", title: "A bíblia do PHP", anotations: "Livro muito bom!", read: false, photo: null },
+		{ id: "3", title: "A bíblia do PHP", anotations: "Livro muito bom!", read: false, photo: null }
 	]
 
   return (
