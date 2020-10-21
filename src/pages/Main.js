@@ -2,7 +2,7 @@ import  React from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Main = () => {
+const Main = ({navigation}) => {
 
 	const data = [
 		{ id: "1", title: "Código Limpo", anotations: "Livro muito bom!", read: false, photo: null },
@@ -14,7 +14,7 @@ const Main = () => {
     <View style={styles.container}>
 			<View style={styles.toolbox}>
 				<Text style={styles.title}>Lista de Leitura</Text>
-				<TouchableOpacity style={styles.toolboxButton} onPress={() => navigation.navigate('Book')}>
+				<TouchableOpacity style={styles.toolboxButton} onPress={() => { navigation.navigate("Book")}}>
 					<Icon name="add" size={35} color="#fff"/>
 				</TouchableOpacity>
 			</View>
