@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Book = ({navigation}) => {
@@ -15,12 +16,24 @@ const Book = ({navigation}) => {
 		return false;
 	}
 
-	const onSave = () => {
+	const onSave = async () => {
 		console.log(`Title = ${title}`);
 		console.log(`Description = ${description}`);
 
 		if (isValid()) {
-			console.log('Válido');		
+			console.log('Válido');
+
+			const id = 1;
+			const data = {
+				id,
+				title,
+				description,
+				photo
+			};
+
+			console.log(JSON.stringify(data));
+			await AsyncStorage.setItem("books", JSON.stringify(data));		
+			
 		} else {
 			console.log('Dados inválido!');
 		}
@@ -99,7 +112,9 @@ const styles = StyleSheet.create({
 		marginBottom: 20
 	},
 	saveButtonInvalid: {
-		opacity: 0.5
+		// opacity: 0.5
+		backgroundColor: "red"
+
 	},	
 	saveButtonText: {
 		fontSize: 16,
