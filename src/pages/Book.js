@@ -8,9 +8,22 @@ const Book = ({navigation}) => {
 	const [description, setDescription] = useState();
 	const [photo, setPhoto] = useState();
 
+	const isValid = () => {
+		if (title !== undefined && title !== '') {
+			return true;
+		} 
+		return false;
+	}
+
 	const onSave = () => {
-		console.warn(`Title = ${title}`);
-		console.warn(`Description = ${description}`);
+		console.log(`Title = ${title}`);
+		console.log(`Description = ${description}`);
+
+		if (isValid()) {
+			console.log('Válido');		
+		} else {
+			console.log('Dados inválido!');
+		}
 	}
 
 	return (
@@ -41,7 +54,7 @@ const Book = ({navigation}) => {
 				<Icon name="camera-alt" size={18} color="#fff"/>
 			</TouchableOpacity>
 
-			<TouchableOpacity style={styles.saveButton} onPress={onSave}>
+			<TouchableOpacity style={[styles.saveButton, (!isValid()) ? styles.saveButtonInvalid : '']} onPress={onSave}>
 				<Text style={styles.saveButtonText}>Cadastrar</Text>
 			</TouchableOpacity>
 
@@ -53,7 +66,7 @@ const Book = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-	container: {
+	container: { 
 		flex: 1,
 		padding:10,
 	},
@@ -85,6 +98,9 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		marginBottom: 20
 	},
+	saveButtonInvalid: {
+		opacity: 0.5
+	},	
 	saveButtonText: {
 		fontSize: 16,
 		color: "#fff"
