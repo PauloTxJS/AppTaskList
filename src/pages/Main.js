@@ -1,26 +1,30 @@
-import  React from 'react';
+import  React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Main = ({navigation}) => {
 
-	const data = [
-		{ id: "1", title: "Código Limpo", anotations: "Livro muito bom!", read: false, photo: null },
-		{ id: "2", title: "C completo e total", anotations: "Muito show", read: false, photo: null },
-		{ id: "3", title: "A bíblia do PHP", anotations: "Livro muito bom!", read: false, photo: null }
-	]
+	const [books, setBooks] = useState([]);
 
-  return (
-    <View style={styles.container}>
+	useEffect(() => {
+		AsyncStorage.getItem("books").then(data => {
+			const book = JSON.parse(data);
+			setBooks(book);
+		})
+	}, []);
+
+	return (
+		<View style={styles.container}>
 			<View style={styles.toolbox}>
 				<Text style={styles.title}>Lista de Leitura</Text>
 				<TouchableOpacity style={styles.toolboxButton} onPress={() => { navigation.navigate("Book")}}>
 					<Icon name="add" size={35} color="#fff"/>
 				</TouchableOpacity>
 			</View>
-      
+		
 			<FlatList 
-				data={data} 
+				data={books} 
 				renderItem={({ item }) => (
 					<TouchableOpacity style={styles.itemButton}>
 						<Text style={styles.itemText}>{item.title}</Text>
@@ -28,8 +32,8 @@ const Main = ({navigation}) => {
 				)} 
 				keyExtractor={item => item.id} 
 			/>
-    </View>
-  );
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({

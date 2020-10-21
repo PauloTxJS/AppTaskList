@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Book = ({navigation}) => {
-	
+	const [books, setBooks] = useState([]);
 	const [title, setTitle] = useState();
 	const [description, setDescription] = useState();
 	const [photo, setPhoto] = useState();
+
+	useEffect(() => {
+		AsyncStorage.getItem("books").then(data => {
+			const book = JSON.parse(data);
+			setBooks(book);
+		})
+	}, []);
 
 	const isValid = () => {
 		if (title !== undefined && title !== '') {
@@ -23,7 +30,7 @@ const Book = ({navigation}) => {
 		if (isValid()) {
 			console.log('Válido');
 
-			const id = 1;
+			const id = Math.random(5000).toString();	
 			const data = {
 				id,
 				title,
@@ -31,8 +38,11 @@ const Book = ({navigation}) => {
 				photo
 			};
 
+			books.push(data);
+
 			console.log(JSON.stringify(data));
-			await AsyncStorage.setItem("books", JSON.stringify(data));		
+			await AsyncStorage.setItem("books", JSON.stringify(books));
+			navigation.goBack();		
 			
 		} else {
 			console.log('Dados inválido!');

@@ -1,0 +1,7 @@
+Failed child context type: Invalid child context `virtualizedCell.cellKey` of type `number` supplied to `CellRenderer`, expected `string`.
+
+
+
+
+
+Each child in a list should have a unique "key" prop.
